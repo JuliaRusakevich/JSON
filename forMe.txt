@@ -1,0 +1,102 @@
+Students
+POST:
+{
+    "name": "Ольга",
+    "age": 14,
+    "score": 8.5,
+    "olympic_gamer": true
+}
+
+если передать невальные данные:
+{
+    "name": "!@#$%^&*(",
+    "age": 120,
+    "score": 15.8,
+    "olympic_gamer": true
+}
+получаем ошибки:
+[
+    {
+        "code": "invalid.name: !@#$%^&*(",
+        "message": "Valid field \"name\": from 3 to 10 russian symbols"
+    },
+    {
+        "code": "invalid.age: 120",
+        "message": "Valid field \"age\": from 7 to 17 years"
+    },
+    {
+        "code": "invalid.score: 15.8",
+        "message": "Valid field \"score\": from 0.0 to 10.0 years"
+    }
+]
+
+PUT:
+{
+        "id": 3,
+        "name": "Павел",
+        "age": 11,
+        "score": 8.9,
+        "olympic_gamer": true
+    }
+если id не существует - ошибка "Unable update student info."
+
+DELETE:
+ {
+        "id": 3
+    }
+    если на id есть ссылка на кросс-таблицу, то студент из нее не удалится!
+    надо сначала убрать из кросс!!!
+
+    если id не существует вообще - "Unable delete student."
+    ___________________________________________________________
+    Groups
+    GET:
+    {
+            "id": 9,
+            "group_name": "JAVA"
+        },
+        {
+            "id": 2,
+            "group_name": "swift"
+        },
+
+    POST:
+    отправляем json:
+    {
+        "group": "UX UI web"
+    }
+    id автоматически генерируется, если есть такое имя, то ошибка "Unable create group."
+
+    PUT:
+    {
+        "id": 24,
+        "group": "UX-UI-web"
+    }
+    с таким же именем нельзя добавить группу
+    если id не найдено, то ошибка "Group wasn't found."
+
+    DELETE:
+    {
+        "id": 24
+    }
+    если нет id - ошибка "Unable delete group."
+    ______________________________
+    Cross
+    POST / DELETE
+
+    {
+        "group_id": 9,
+        "students": [
+            {
+                "student_id": 12
+            },
+            {
+                "student_id": 13
+            },
+            {
+                "student_id": 14
+            }
+        ]
+    }
+
+    ОДНОГО СТУДЕНТА ДОБАВЛЯТЬ В НЕСКОЛЬКО ГРУПП!!!! СДЕЛАТЬ!!!
